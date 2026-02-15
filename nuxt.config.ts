@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint", "@vite-pwa/nuxt"],
+  modules: ['@nuxt/eslint', '@vite-pwa/nuxt'],
   pwa: {
     manifest: {
       name: 'Simple Record',
@@ -29,5 +29,5 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true }
+  devtools: { enabled: true },
 })

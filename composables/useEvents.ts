@@ -1,41 +1,41 @@
-import { ref, onMounted } from 'vue';
-import Dexie from 'dexie';
+import { ref, onMounted } from 'vue'
+import Dexie from 'dexie'
 
 interface Event {
-  timestamp: number;
+  timestamp: number
 }
 
 class EventsDB extends Dexie {
-  events: Dexie.Table<Event, number>;
+  events: Dexie.Table<Event, number>
 
   constructor() {
-    super('EventsDB');
+    super('EventsDB')
     this.version(1).stores({
       events: 'timestamp',
-    });
-    this.events = this.table('events');
+    })
+    this.events = this.table('events')
   }
 }
 
-const db = new EventsDB();
-const events = ref<Event[]>([]);
+const db = new EventsDB()
+const events = ref<Event[]>([])
 
 export function useEvents() {
   const fetchEvents = async () => {
-    const allEvents = await db.events.orderBy('timestamp').reverse().toArray();
-    events.value = allEvents;
-  };
+    const allEvents = await db.events.orderBy('timestamp').reverse().toArray()
+    events.value = allEvents
+  }
 
   const addEvent = async (event: Event) => {
-    await db.events.add(event);
-    await fetchEvents();
-  };
+    await db.events.add(event)
+    await fetchEvents()
+  }
 
-  onMounted(fetchEvents);
+  onMounted(fetchEvents)
 
   return {
     events,
     addEvent,
-    fetchEvents
-  };
+    fetchEvents,
+  }
 }

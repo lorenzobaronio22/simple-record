@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { useEvents } from '~/composables/useEvents';
+import { useEvents } from '~/composables/useEvents'
 
-const { events } = useEvents();
+const { events } = useEvents()
 </script>
 
 <style scoped>

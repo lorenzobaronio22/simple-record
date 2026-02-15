@@ -1,18 +1,18 @@
 <template>
   <main class="container">
-    <button @click="recordEvent" class="record-button">Record!</button>
+    <button class="record-button" @click="recordEvent">Record!</button>
     <NuxtLink to="/logs" class="logs-link">Logs</NuxtLink>
   </main>
 </template>
 
 <script setup lang="ts">
-import { useEvents } from '~/composables/useEvents';
+import { useEvents } from '~/composables/useEvents'
 
-const { addEvent } = useEvents();
+const { addEvent } = useEvents()
 
 const recordEvent = () => {
-  addEvent({ timestamp: Date.now() });
-};
+  addEvent({ timestamp: Date.now() })
+}
 </script>
 
 <style scoped>

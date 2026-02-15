@@ -21,12 +21,14 @@ A simple, offline-first Progressive Web App (PWA) for recording events or timest
 ## Getting Started
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/your-username/simple-record.git
    cd simple-record
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
