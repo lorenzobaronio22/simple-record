@@ -1,0 +1,37 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.package-version.outputs.current-version}}
+            ghcr.io/${{ github.repository }}:latest
+
+      - name: Create Git Tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: v${{ steps.package-version.outputs.current-version}}
+          message: "Release v${{ steps.package-version.outputs.current-version}}"
