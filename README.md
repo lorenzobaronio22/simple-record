@@ -1,75 +1,45 @@
-# Nuxt Minimal Starter
+# Simple Record
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A simple, offline-first Progressive Web App (PWA) for recording events or timestamps with a single click.
 
-## Setup
+## Features
 
-Make sure to install dependencies:
+- **One-click event recording:** Capture timestamps instantly.
+- **Event Log:** View all recorded timestamps in a clean, chronological list.
+- **Offline Support:** Fully functional without an internet connection.
+- **Local Data Storage:** All data is stored in your browser using IndexedDB, so it persists between sessions.
 
-```bash
-# npm
-npm install
+## Tech Stack
 
-# pnpm
-pnpm install
+- **Framework:** [Nuxt](https://nuxt.com/)
+- **UI Library:** [Vue.js](https://vuejs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Offline Storage:** [Dexie.js](https://dexie.org/) (for IndexedDB)
+- **PWA:** [@vite-pwa/nuxt](https://vite-pwa-org.netlify.app/frameworks/nuxt.html)
+- **Testing:** [Vitest](https://vitest.dev/)
 
-# yarn
-yarn install
+## Getting Started
 
-# bun
-bun install
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/simple-record.git
+   cd simple-record
+   ```
 
-## Development Server
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Start the development server on `http://localhost:3000`:
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:3000`.
 
-```bash
-# npm
-npm run dev
+## Available Scripts
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the application for production.
+- `npm run preview`: Locally previews the production build.
+- `npm run test`: Runs the test suite.
