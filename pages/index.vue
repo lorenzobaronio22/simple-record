@@ -11,7 +11,7 @@ import { useEvents } from '~/composables/useEvents'
 const { addEvent } = useEvents()
 
 const recordEvent = () => {
-  addEvent({ timestamp: Date.now() })
+  addEvent()
 }
 </script>
 

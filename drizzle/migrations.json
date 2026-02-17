@@ -1,0 +1,1 @@
+[{"sql":["CREATE TABLE \"events\" (\n\t\"id\" uuid PRIMARY KEY NOT NULL,\n\t\"timestamp\" timestamp with time zone NOT NULL\n);\n"],"bps":true,"folderMillis":1771367262090,"hash":"4f950de0b37561fa4ff18c3266c95f20ee50e52ba37befd2b245931429833abc"}]

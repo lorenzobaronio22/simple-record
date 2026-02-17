@@ -1,41 +1,28 @@
 import { ref, onMounted } from 'vue'
-import Dexie from 'dexie'
+import { useNuxtApp } from '#app'
+import { v4 as uuidv4 } from 'uuid'
+import { events as eventsSchema } from '~/db/schema'
 
-interface Event {
-  timestamp: number
-}
+export const useEvents = () => {
+  const { $db } = useNuxtApp()
+  const events = ref<any[]>([])
 
-class EventsDB extends Dexie {
-  events: Dexie.Table<Event, number>
-
-  constructor() {
-    super('EventsDB')
-    this.version(1).stores({
-      events: 'timestamp',
-    })
-    this.events = this.table('events')
-  }
-}
-
-const db = new EventsDB()
-const events = ref<Event[]>([])
-
-export function useEvents() {
   const fetchEvents = async () => {
-    const allEvents = await db.events.orderBy('timestamp').reverse().toArray()
-    events.value = allEvents
+    events.value = await $db.query.events.findMany({
+      orderBy: (events, { desc }) => [desc(events.timestamp)],
+    })
   }
 
-  const addEvent = async (event: Event) => {
-    await db.events.add(event)
+  const addEvent = async () => {
+    const newEvent = {
+      id: uuidv4(),
+      timestamp: new Date(),
+    }
+    await $db.insert(eventsSchema).values(newEvent)
     await fetchEvents()
   }
 
   onMounted(fetchEvents)
 
-  return {
-    events,
-    addEvent,
-    fetchEvents,
-  }
+  return { events, addEvent, fetchEvents }
 }
