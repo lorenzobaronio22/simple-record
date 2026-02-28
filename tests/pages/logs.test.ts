@@ -8,9 +8,10 @@ vi.mock('~/composables/useEvents')
 
 describe('LogsPage', () => {
   it('renders a list of events', () => {
+    const now = Date.now()
     const mockEvents = ref([
-      { id: 1, type: 'start', timestamp: Date.now() },
-      { id: 2, type: 'stop', timestamp: Date.now() + 1000 },
+      { hlc: '00000002-0000-dev', timestamp: now, userId: 'u1', deviceId: 'd1' },
+      { hlc: '00000001-0000-dev', timestamp: now + 1000, userId: 'u1', deviceId: 'd1' },
     ])
 
     vi.mocked(useEvents).mockReturnValue({
