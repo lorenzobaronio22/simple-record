@@ -11,9 +11,7 @@
 import {
   getChangesForSync,
   applyServerChanges,
-  getLastSyncedHeads,
   setLastSyncedHeads,
-  readAllEvents,
 } from '~/composables/eventsStore.client'
 import { useUserId } from '~/composables/useUserId'
 
@@ -66,7 +64,6 @@ export function useSync() {
   running = true
 
   const userId = useUserId()
-  const nuxtApp = useNuxtApp()
 
   let timer: ReturnType<typeof setTimeout> | null = null
   let retries = 0

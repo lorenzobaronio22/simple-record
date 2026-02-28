@@ -12,12 +12,16 @@ describe('sync: two-device merge', () => {
   /** Create a fresh doc and round-trip through save/load for a clean root. */
   function createDoc(): Automerge.Doc<EventsDoc> {
     const d = Automerge.from<EventsDoc>({ events: {} })
-    return Automerge.load<EventsDoc>(Automerge.save(d) as Automerge.BinaryDocument)
+    return Automerge.load<EventsDoc>(
+      Automerge.save(d) as Automerge.BinaryDocument
+    )
   }
 
   /** Fork a doc via save/load to guarantee independent document roots. */
   function fork(doc: Automerge.Doc<EventsDoc>): Automerge.Doc<EventsDoc> {
-    return Automerge.load<EventsDoc>(Automerge.save(doc) as Automerge.BinaryDocument)
+    return Automerge.load<EventsDoc>(
+      Automerge.save(doc) as Automerge.BinaryDocument
+    )
   }
 
   function addToDoc(

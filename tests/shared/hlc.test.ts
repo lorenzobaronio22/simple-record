@@ -3,7 +3,11 @@ import { nextHlc, parseHlc } from '~/shared/hlc'
 
 describe('HLC', () => {
   it('generates a valid HLC string', () => {
-    const { hlc, wallMs } = nextHlc({ nowMs: 1000, lastHlc: '', nodeId: 'node-1' })
+    const { hlc, wallMs } = nextHlc({
+      nowMs: 1000,
+      lastHlc: '',
+      nodeId: 'node-1',
+    })
     expect(typeof hlc).toBe('string')
     expect(wallMs).toBe(1000)
 
@@ -41,7 +45,11 @@ describe('HLC', () => {
     const hlcs: string[] = []
     let last = ''
     for (let i = 0; i < 5; i++) {
-      const { hlc } = nextHlc({ nowMs: 1000 + i * 100, lastHlc: last, nodeId: 'dev' })
+      const { hlc } = nextHlc({
+        nowMs: 1000 + i * 100,
+        lastHlc: last,
+        nodeId: 'dev',
+      })
       hlcs.push(hlc)
       last = hlc
     }

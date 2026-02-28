@@ -1,6 +1,6 @@
 ## Plan: Nuxt backend + local-first sync (Automerge CRDT + HLC) + SQLite
 
-TL;DR: Keep the UI and Nuxt stack unchanged, but replace "events stored as rows" with a single local Automerge document persisted in IndexedDB (Dexie). Add a Nitro endpoint `POST /api/sync` that stores one Automerge doc per `userId` in SQLite (on a mounted volume). Client runs background sync when online, using an Automerge *change-based* protocol (no per-device sync-state on the server). Each record will include `userId` and `deviceId`, and ordering will be deterministic via an HLC string.
+TL;DR: Keep the UI and Nuxt stack unchanged, but replace "events stored as rows" with a single local Automerge document persisted in IndexedDB (Dexie). Add a Nitro endpoint `POST /api/sync` that stores one Automerge doc per `userId` in SQLite (on a mounted volume). Client runs background sync when online, using an Automerge _change-based_ protocol (no per-device sync-state on the server). Each record will include `userId` and `deviceId`, and ordering will be deterministic via an HLC string.
 
 **Steps**
 

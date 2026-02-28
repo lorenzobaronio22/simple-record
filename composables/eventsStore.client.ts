@@ -122,7 +122,9 @@ export async function readAllEvents(): Promise<EventRecord[]> {
 
 /** Extract a sorted-by-HLC-descending array from a doc. */
 function sortedEvents(doc: Automerge.Doc<EventsDoc>): EventRecord[] {
-  return Object.values(doc.events).sort((a, b) => (b.hlc > a.hlc ? 1 : b.hlc < a.hlc ? -1 : 0))
+  return Object.values(doc.events).sort((a, b) =>
+    b.hlc > a.hlc ? 1 : b.hlc < a.hlc ? -1 : 0
+  )
 }
 
 // ─── Sync helpers (used by useSync) ─────────────────────────────────────────

@@ -58,25 +58,30 @@ export default defineEventHandler(async (event) => {
   }>(event)
 
   if (!body || !Array.isArray(body.clientHeads)) {
-    throw createError({ statusCode: 400, statusMessage: 'Invalid request body' })
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid request body',
+    })
   }
 
   const db = getDB()
 
   // 1. Load (or init) the server doc for this user
-  const row = db.prepare('SELECT doc FROM docs WHERE userId = ?').get(userId) as
-    | { doc: Buffer }
-    | undefined
+  const row = db
+    .prepare('SELECT doc FROM docs WHERE userId = ?')
+    .get(userId) as { doc: Buffer } | undefined
 
   let doc: Automerge.Doc<EventsDoc>
   if (row?.doc) {
-    doc = Automerge.load<EventsDoc>(new Uint8Array(row.doc) as Automerge.BinaryDocument)
+    doc = Automerge.load<EventsDoc>(
+      new Uint8Array(row.doc) as Automerge.BinaryDocument
+    )
   } else {
     doc = Automerge.from<EventsDoc>({ events: {} })
   }
 
   // Remember heads *before* applying client changes so we can diff later
-  const headsBeforeApply = Automerge.getHeads(doc)
+  const _ = Automerge.getHeads(doc)
 
   // 2. Apply incoming client changes
   const clientChanges = decodeChanges(body.changesBase64)
